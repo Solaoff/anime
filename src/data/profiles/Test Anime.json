@@ -1,0 +1,55 @@
+{
+  "metadata": {
+    "anime_name": "Test Anime",
+    "created_date": "2025-08-16T01:06:30.817154",
+    "last_modified": "2025-08-16T01:06:50.175722",
+    "version": "1.0"
+  },
+  "characters": {
+    "Napisy": {
+      "name": "Napisy",
+      "tts_engine": "elevenlabs",
+      "voice": "Rachel",
+      "gender": "unknown",
+      "api_key": "222222222222",
+      "voice_id": "222222",
+      "estimated_tokens": 0
+    },
+    "Dziewczynka A": {
+      "name": "Dziewczynka A",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-ZofiaNeural",
+      "gender": "female",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Mama dziewczynki A": {
+      "name": "Mama dziewczynki A",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "female",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Tiwa": {
+      "name": "Tiwa",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "female",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Rudo": {
+      "name": "Rudo",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    }
+  }
+}

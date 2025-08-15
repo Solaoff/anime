@@ -1,0 +1,71 @@
+{
+  "metadata": {
+    "anime_name": "Test Anime",
+    "created_date": "2025-01-15T10:00:00",
+    "version": "1.0",
+    "last_modified": "2025-08-16T00:42:55.191772"
+  },
+  "characters": {
+    "Tiwa": {
+      "name": "Tiwa",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-ZofiaNeural",
+      "gender": "female",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Rudo": {
+      "name": "Rudo",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "male",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Napisy": {
+      "name": "Napisy",
+      "tts_engine": "elevenlabs",
+      "voice": "Rachel",
+      "gender": "female",
+      "api_key": "sk_d7886f8a7e9afc134705cac6dedf3152528995adf8bfc508",
+      "voice_id": "1111111",
+      "estimated_tokens": 0
+    },
+    "Dziewczynka A": {
+      "name": "Dziewczynka A",
+      "tts_engine": "elevenlabs",
+      "voice": "Rachel",
+      "gender": "female",
+      "api_key": "k_2f4aa12257ca1935125020e28afe6de1180ce94bae21b0d9",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Mama dziewczynki A": {
+      "name": "Mama dziewczynki A",
+      "tts_engine": "elevenlabs",
+      "voice": "Rachel",
+      "gender": "male",
+      "api_key": "11111",
+      "voice_id": "11",
+      "estimated_tokens": 0
+    },
+    "Kobieta 1": {
+      "name": "Kobieta 1",
+      "tts_engine": "elevenlabs",
+      "voice": "Rachel",
+      "gender": "unknown",
+      "api_key": "111111111111111111",
+      "estimated_tokens": 0
+    },
+    "Apostoł-1": {
+      "name": "Apostoł-1",
+      "tts_engine": "elevenlabs",
+      "voice": "Domi",
+      "gender": "male",
+      "api_key": "111",
+      "estimated_tokens": 0
+    }
+  }
+}

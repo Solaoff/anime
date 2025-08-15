@@ -1,0 +1,8 @@
+#tkinter
+pathlib
+datetime
+requests  # Для API запросов к ElevenLabs
+#json
+#collections
+#re
+#abc

@@ -11,6 +11,7 @@ sys.path.append(str(Path(__file__).parent.parent))
 from processors.subtitle_analyzer import SubtitleAnalyzer
 from profiles.character_profile import ProfileManager
 from gui.character_setup import CharacterSetupWindow
+from tts_engines.tts_manager import TTSManager
 
 class MainWindow:
     def __init__(self, settings):
@@ -22,6 +23,7 @@ class MainWindow:
         
         self.analyzer = SubtitleAnalyzer()
         self.profile_manager = ProfileManager()
+        self.tts_manager = TTSManager(settings)
         
         self.current_subtitles = None
         self.current_characters = None
@@ -58,6 +60,9 @@ class MainWindow:
         # Выпадающий список вместо обычного поля
         self.anime_name_combo = ttk.Combobox(project_frame, textvariable=self.anime_name_var, width=35)
         self.anime_name_combo.grid(row=0, column=1, padx=5, sticky=(tk.W, tk.E))
+        
+        # Включаем копирование/вставку для поля названия аниме
+        self.enable_copy_paste_combobox(self.anime_name_combo)
         
         ttk.Button(project_frame, text="Обновить список", 
                   command=self.update_anime_list, width=15).grid(row=0, column=2, padx=2)
@@ -118,6 +123,87 @@ class MainWindow:
         
         # Обновляем список профилей ПОСЛЕ создания всех виджетов
         self.update_anime_list()
+    
+    def enable_copy_paste_combobox(self, widget):
+        """Включаем копирование и вставку для любого виджета"""
+        def on_copy(event=None):
+            try:
+                widget.tk.call('tk::TextCopy', widget)
+            except:
+                try:
+                    if hasattr(widget, 'selection_get'):
+                        text = widget.selection_get()
+                        widget.clipboard_clear()
+                        widget.clipboard_append(text)
+                except:
+                    pass
+                    
+        def on_paste(event=None):
+            try:
+                widget.tk.call('tk::TextPaste', widget)
+            except:
+                try:
+                    text = widget.clipboard_get()
+                    if hasattr(widget, 'insert'):
+                        pos = widget.index(tk.INSERT) if hasattr(widget, 'index') else tk.END
+                        widget.insert(pos, text)
+                except:
+                    pass
+                    
+        def on_cut(event=None):
+            try:
+                widget.tk.call('tk::TextCut', widget)
+            except:
+                try:
+                    if hasattr(widget, 'selection_get'):
+                        text = widget.selection_get()
+                        widget.clipboard_clear()
+                        widget.clipboard_append(text)
+                        widget.delete(tk.SEL_FIRST, tk.SEL_LAST)
+                except:
+                    pass
+                    
+        def on_select_all(event=None):
+            try:
+                if hasattr(widget, 'select_range'):
+                    widget.select_range(0, tk.END)
+                elif hasattr(widget, 'tag_add'):
+                    widget.tag_add(tk.SEL, "1.0", tk.END)
+                elif hasattr(widget, 'selection_range'):
+                    widget.selection_range(0, tk.END)
+            except:
+                pass
+            return 'break'
+        
+        # Привязываем горячие клавиши
+        widget.bind('<Control-c>', on_copy)
+        widget.bind('<Control-v>', on_paste) 
+        widget.bind('<Control-x>', on_cut)
+        widget.bind('<Control-a>', on_select_all)
+        
+        # Контекстное меню
+        try:
+            widget.bind('<Button-3>', lambda e: self.show_context_menu(e, widget))
+        except:
+            pass
+    
+    def show_context_menu(self, event, widget):
+        """Показать контекстное меню"""
+        try:
+            menu = tk.Menu(self.root, tearoff=0)
+            menu.add_command(label="Копировать", command=lambda: widget.event_generate('<<Copy>>'))
+            menu.add_command(label="Вставить", command=lambda: widget.event_generate('<<Paste>>'))
+            menu.add_command(label="Вырезать", command=lambda: widget.event_generate('<<Cut>>'))
+            menu.add_separator()
+            menu.add_command(label="Выделить все", command=lambda: widget.select_range(0, tk.END) if hasattr(widget, 'select_range') else None)
+            menu.tk_popup(event.x_root, event.y_root)
+        except:
+            pass
+        finally:
+            try:
+                menu.grab_release()
+            except:
+                pass
     
     def update_anime_list(self):
         """Обновление списка доступных профилей аниме"""
@@ -186,7 +272,17 @@ class MainWindow:
                 char_settings = self.current_profile.get_character(stat['name'])
                 if char_settings:
                     tts_engine = char_settings.get('tts_engine', '—')
-                    voice = char_settings.get('voice', '—')
+                    
+                    # Умное отображение: приоритет voice_id над voice
+                    voice_id = char_settings.get('voice_id', '').strip()
+                    standard_voice = char_settings.get('voice', '').strip()
+                    
+                    if voice_id:
+                        voice = f"ID: {voice_id}"
+                    elif standard_voice:
+                        voice = standard_voice
+                    else:
+                        voice = "—"
             
             self.character_tree.insert("", tk.END, values=(
                 stat['name'], 
@@ -224,7 +320,7 @@ class MainWindow:
             print(f"В профиле персонажей: {len(self.current_profile.get_all_characters())}")
             
         setup_window = CharacterSetupWindow(self.root, self.current_characters, 
-                                          self.current_profile, self.settings)
+                                          self.current_profile, self.settings, self.current_subtitles)
         self.root.wait_window(setup_window.window)
         
         # Обновляем таблицу и список профилей после настройки
@@ -239,7 +335,60 @@ class MainWindow:
             messagebox.showwarning("Предупреждение", "Выберите персонажа")
             return
             
-        messagebox.showinfo("Информация", "Функция тестирования в разработке")
+        if not self.current_profile:
+            messagebox.showwarning("Предупреждение", "Сначала настройте голоса персонажей")
+            return
+            
+        # Получаем данные выбранного персонажа
+        item = self.character_tree.item(selected[0])
+        character_name = item['values'][0]
+        
+        # Получаем настройки персонажа из профиля
+        char_settings = self.current_profile.get_character(character_name)
+        if not char_settings:
+            messagebox.showwarning("Предупреждение", f"Персонаж '{character_name}' не настроен")
+            return
+            
+        tts_engine = char_settings.get('tts_engine')
+        if not tts_engine:
+            messagebox.showwarning("Предупреждение", f"TTS движок не выбран для '{character_name}'")
+            return
+            
+        # Проверяем ElevenLabs
+        if tts_engine == 'ElevenLabs':
+            api_key = char_settings.get('api_key', '').strip()
+            voice_id = char_settings.get('voice_id', '').strip()
+            
+            if not api_key:
+                messagebox.showwarning("Предупреждение", f"API ключ не указан для '{character_name}'")
+                return
+                
+            if not voice_id:
+                messagebox.showwarning("Предупреждение", f"Voice ID не указан для '{character_name}'")
+                return
+                
+            # Тестовый текст
+            test_text = f"Hello, I am {character_name}. This is a voice test."
+            
+            # Запуск теста
+            self.status_var.set(f"Тестирование голоса {character_name}...")
+            self.root.update()
+            
+            try:
+                result = self.tts_manager.test_voice(tts_engine, char_settings, test_text)
+                
+                if result['success']:
+                    self.status_var.set(f"Голос {character_name} протестирован успешно")
+                    messagebox.showinfo("Успех", f"Голос персонажа '{character_name}' воспроизведен")
+                else:
+                    self.status_var.set("Ошибка тестирования голоса")
+                    messagebox.showerror("Ошибка", f"Ошибка теста голоса: {result['error']}")
+                    
+            except Exception as e:
+                self.status_var.set("Ошибка тестирования")
+                messagebox.showerror("Ошибка", f"Ошибка при тестировании: {str(e)}")
+        else:
+            messagebox.showinfo("Информация", f"Тестирование {tts_engine} в разработке")
     
     def start_dubbing(self):
         """Начать процесс дубляжа"""

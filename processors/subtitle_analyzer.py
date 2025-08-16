@@ -9,20 +9,47 @@ class SubtitleAnalyzer:
         self.polish_female_endings = ['ska', 'cka', 'dzka', 'owska', 'ewska', 'a']
         
     def parse_srt(self, srt_content):
-        """Парсинг .srt файла"""
-        pattern = r'(\d+)\n([^\n]+)\n(\d{2}:\d{2}:\d{2},\d{3}) --> (\d{2}:\d{2}:\d{2},\d{3})\n(.*?)(?=\n\n|\n\d+\n|\Z)'
-        matches = re.findall(pattern, srt_content, re.DOTALL)
+        """Парсинг .srt файла с правильным форматом"""
+        # Разбиваем на блоки по пустым строкам
+        blocks = re.split(r'\n\s*\n', srt_content.strip())
         
         subtitles = []
-        for match in matches:
-            subtitles.append({
-                'id': int(match[0]),
-                'character': match[1].strip(),
-                'start_time': self._parse_time(match[2]),
-                'end_time': self._parse_time(match[3]),
-                'text': match[4].strip(),
-                'duration': self._calculate_duration(match[2], match[3])
-            })
+        for block in blocks:
+            lines = [line.strip() for line in block.split('\n') if line.strip()]
+            
+            if len(lines) >= 4:  # Минимум 4 строки: номер, имя, время, текст
+                try:
+                    # Строка 1: номер
+                    subtitle_id = int(lines[0])
+                    
+                    # Строка 2: имя персонажа
+                    character = lines[1]
+                    
+                    # Строка 3: временной код
+                    time_line = lines[2]
+                    if '-->' in time_line:
+                        time_parts = time_line.split(' --> ')
+                        start_time = self._parse_time(time_parts[0])
+                        end_time = self._parse_time(time_parts[1])
+                    else:
+                        continue  # Пропускаем некорректные блоки
+                    
+                    # Строка 4+: текст реплики (может быть многострочной)
+                    text_lines = lines[3:]
+                    text = '\n'.join(text_lines)
+                    
+                    subtitles.append({
+                        'id': subtitle_id,
+                        'character': character,
+                        'start_time': start_time,
+                        'end_time': end_time,
+                        'text': text,  # Тут теперь хранится только текст реплики
+                        'duration': end_time - start_time
+                    })
+                    
+                except (ValueError, IndexError):
+                    continue  # Пропускаем некорректные блоки
+        
         return subtitles
     
     def analyze_characters(self, subtitles):
@@ -72,10 +99,6 @@ class SubtitleAnalyzer:
         minutes = int(time_parts[1])
         seconds = float(time_parts[2])
         return hours * 3600 + minutes * 60 + seconds
-    
-    def _calculate_duration(self, start, end):
-        """Вычисление длительности в секундах"""
-        return self._parse_time(end) - self._parse_time(start)
     
     def get_character_stats(self, characters):
         """Статистика по персонажам"""

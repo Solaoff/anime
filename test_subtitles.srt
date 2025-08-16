@@ -1,0 +1,65 @@
+23
+Apostoł-1
+00:02:41,140 --> 00:02:42,400
+A stój!
+
+24
+Apostoł-4
+00:02:46,410 --> 00:02:47,520
+Tam jest!
+
+25
+Apostoł-4
+00:02:47,520 --> 00:02:48,980
+Nie puszczajcie tego szmelcu!
+
+26
+Apostoł-3
+00:02:58,910 --> 00:03:00,030
+Zwinny…
+
+27
+Apostoł-1
+00:03:01,240 --> 00:03:02,720
+Stój, zarazo!
+
+28
+Wszyscy
+00:03:13,400 --> 00:03:14,600
+Pobiegł tam!
+
+29
+Wszyscy
+00:03:14,600 --> 00:03:17,360
+Przeszukajcie wszystko,
+ale złapać szabrownika!
+
+30
+Rudo
+00:03:23,150 --> 00:03:24,770
+Pierdolone ścierwa…
+
+31
+Rudo
+00:03:26,240 --> 00:03:27,770
+Ja nie jestem żadnym szabrownikiem!
+
+32
+Apostoł-1
+00:03:30,150 --> 00:03:31,200
+Znaleźliśmy go!
+
+33
+Rudo
+00:03:35,400 --> 00:03:37,100
+Muszę stąd uciekać!
+
+34
+Apostoł-3
+00:03:40,200 --> 00:03:41,500
+Nie uciekniesz!
+
+35
+Wszyscy
+00:03:45,100 --> 00:03:46,800
+Otoczcie go z wszystkich stron!

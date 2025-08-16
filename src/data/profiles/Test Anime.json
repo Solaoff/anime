@@ -2,7 +2,7 @@
   "metadata": {
     "anime_name": "Test Anime",
     "created_date": "2025-08-16T01:06:30.817154",
-    "last_modified": "2025-08-16T01:06:50.175722",
+    "last_modified": "2025-08-16T01:19:29.692746",
     "version": "1.0"
   },
   "characters": {
@@ -17,11 +17,11 @@
     },
     "Dziewczynka A": {
       "name": "Dziewczynka A",
-      "tts_engine": "edge_tts",
-      "voice": "pl-PL-ZofiaNeural",
+      "tts_engine": "elevenlabs",
+      "voice": "3333",
       "gender": "female",
-      "api_key": "",
-      "voice_id": "",
+      "api_key": "33333333333",
+      "voice_id": "3333333",
       "estimated_tokens": 0
     },
     "Mama dziewczynki A": {

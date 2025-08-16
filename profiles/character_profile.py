@@ -31,7 +31,7 @@ class CharacterProfile:
             "version": "1.0"
         }
         
-    def add_character(self, name, tts_engine, voice, gender="unknown", api_key="", voice_id=""):
+    def add_character(self, name, tts_engine, voice, gender="unknown", api_key="", voice_id="", estimated_tokens=0):
         """Добавить персонажа в профиль"""
         self.characters[name] = {
             "name": name,
@@ -40,10 +40,10 @@ class CharacterProfile:
             "gender": gender,
             "api_key": api_key,  # API ключ для TTS сервисов
             "voice_id": voice_id,  # ID голоса для ElevenLabs
-            "estimated_tokens": 0  # Оценка нужных токенов
+            "estimated_tokens": estimated_tokens  # Рассчитанные токены
         }
         self.metadata["last_modified"] = datetime.now().isoformat()
-        print(f"Персонаж добавлен в профиль: {name} -> {tts_engine} - {voice} (ID: {voice_id})")
+        print(f"Персонаж добавлен в профиль: {name} -> {tts_engine} - {voice} (ID: {voice_id}, Токенов: {estimated_tokens})")
     
     def update_character(self, name, **kwargs):
         """Обновить настройки персонажа"""

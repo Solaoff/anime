@@ -27,6 +27,11 @@ class TextCounter:
         for character, texts in self.character_texts.items():
             self.character_stats[character] = self.calculate_stats(texts)
         
+        # Добавляем пустые статистики для персонажей без текста
+        for character_name in characters_map:
+            if character_name not in self.character_stats:
+                self.character_stats[character_name] = self.calculate_stats([])
+        
         return self.character_stats
     
     def identify_character(self, text, characters_map):

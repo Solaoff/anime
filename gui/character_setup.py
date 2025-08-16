@@ -161,7 +161,7 @@ class CharacterSetupWindow:
         
         # Кнопки
         button_frame = ttk.Frame(main_frame)
-        button_frame.grid(row=3, column=0, columnspan=7, pady=15)
+        button_frame.pack(row=3, column=0, columnspan=7, pady=15)
         
         ttk.Button(button_frame, text="Автонастройка", 
                   command=self.auto_setup, width=18).pack(side=tk.LEFT, padx=10)

@@ -2,17 +2,17 @@
   "metadata": {
     "anime_name": "Test Anime",
     "created_date": "2025-08-16T01:06:30.817154",
-    "last_modified": "2025-08-16T01:19:29.692746",
+    "last_modified": "2025-08-16T03:08:38.261494",
     "version": "1.0"
   },
   "characters": {
     "Napisy": {
       "name": "Napisy",
-      "tts_engine": "elevenlabs",
-      "voice": "Rachel",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
       "gender": "unknown",
-      "api_key": "222222222222",
-      "voice_id": "222222",
+      "api_key": "",
+      "voice_id": "",
       "estimated_tokens": 0
     },
     "Dziewczynka A": {
@@ -44,9 +44,153 @@
     },
     "Rudo": {
       "name": "Rudo",
+      "tts_engine": "elevenlabs",
+      "voice": "",
+      "gender": "male",
+      "api_key": "sk_2f4aa12257ca1935125020e28afe6de1180ce94bae21b0d9sk_2f4aa12257ca1935125020e28afe6de1180ce94bae21b0d9",
+      "voice_id": "aAY9hMI6VU335JUszdRsaAY9hMI6VU335JUszdRs",
+      "estimated_tokens": 0
+    },
+    "Apostoł-1": {
+      "name": "Apostoł-1",
       "tts_engine": "edge_tts",
       "voice": "pl-PL-MarekNeural",
       "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Apostoł-4": {
+      "name": "Apostoł-4",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Apostoł-3": {
+      "name": "Apostoł-3",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Wszyscy": {
+      "name": "Wszyscy",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Kobieta 1": {
+      "name": "Kobieta 1",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Kobieta 2": {
+      "name": "Kobieta 2",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Mężczyzna 1": {
+      "name": "Mężczyzna 1",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Mężczyzna 2": {
+      "name": "Mężczyzna 2",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Chłopak A": {
+      "name": "Chłopak A",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-ZofiaNeural",
+      "gender": "female",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Chłopak B": {
+      "name": "Chłopak B",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Chłopak C": {
+      "name": "Chłopak C",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Mama Tiwy": {
+      "name": "Mama Tiwy",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Regto": {
+      "name": "Regto",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Mężczyzna 3": {
+      "name": "Mężczyzna 3",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Kobieta 3": {
+      "name": "Kobieta 3",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-MarekNeural",
+      "gender": "unknown",
+      "api_key": "",
+      "voice_id": "",
+      "estimated_tokens": 0
+    },
+    "Sędzia": {
+      "name": "Sędzia",
+      "tts_engine": "edge_tts",
+      "voice": "pl-PL-ZofiaNeural",
+      "gender": "female",
       "api_key": "",
       "voice_id": "",
       "estimated_tokens": 0

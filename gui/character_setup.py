@@ -9,10 +9,12 @@ from tts_engines.tts_manager import TTSManager
 import pygame
 
 class CharacterSetupWindow:
-    def __init__(self, parent, characters, profile=None):
+    def __init__(self, parent, characters, profile=None, settings=None, subtitles=None):
         self.parent = parent
         self.characters = characters
         self.profile = profile
+        self.settings = settings  # Добавлен параметр settings
+        self.subtitles = subtitles  # Добавлен параметр subtitles
         self.tts_manager = TTSManager()
         
         # Доступные TTS движки
@@ -142,7 +144,7 @@ class CharacterSetupWindow:
         # Включаем копирование/вставку для API ключа
         self.enable_copy_paste(api_entry)
         
-        # Кнопки действий - используем только grid()
+        # Кнопки действий - ИСПРАВЛЕНО: используем только grid()
         button_frame = ttk.Frame(parent_frame)
         button_frame.grid(row=row, column=6, padx=2, pady=4)
         
@@ -185,11 +187,11 @@ class CharacterSetupWindow:
             api_entry = vars_dict['api_entry']
             
             if engine == "elevenlabs":
-                # Показываем поля для ElevenLabs - используем только grid()
+                # Показываем поля для ElevenLabs - ИСПРАВЛЕНО: используем только grid()
                 voice_id_entry.grid()
                 api_entry.grid()
             else:
-                # Скрываем поля для других движков - используем grid_remove()
+                # Скрываем поля для других движков - ИСПРАВЛЕНО: используем grid_remove()
                 voice_id_entry.grid_remove()
                 api_entry.grid_remove()
     
@@ -308,12 +310,6 @@ class CharacterSetupWindow:
                 color = "green"
         
         vars_dict['status'].set(status)
-        # Обновляем цвет статуса через parent widget
-        status_label = None
-        for child in vars_dict['status']._root().winfo_children():
-            if hasattr(child, 'cget') and child.cget('textvariable') == str(vars_dict['status']):
-                child.configure(foreground=color)
-                break
     
     def check_api_limits(self, character_name):
         """Проверка лимитов API для персонажа"""

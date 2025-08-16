@@ -129,11 +129,11 @@ class CharacterSetupWindow:
             
             refresh_btn = ttk.Button(button_frame, text="⟳", width=3,
                                    command=lambda n=name: self.check_api_limits(n))
-            refresh_btn.pack(side=tk.LEFT)
+            refresh_btn.grid(row=0, column=0)
             
             test_btn = ttk.Button(button_frame, text="🔊", width=3,
                                 command=lambda n=name: self.test_character_voice(n))
-            test_btn.pack(side=tk.LEFT)
+            test_btn.grid(row=0, column=1)
             
             # Статус
             status_var = tk.StringVar(value="Не настроен")
